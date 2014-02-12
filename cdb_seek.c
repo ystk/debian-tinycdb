@@ -1,5 +1,4 @@
-/* $Id: cdb_seek.c,v 1.7 2006-09-03 09:51:25 mjt Exp $
- * old interface for reading cdb file
+/* cdb_seek.c: old interface for reading cdb file
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

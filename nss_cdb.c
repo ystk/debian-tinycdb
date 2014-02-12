@@ -1,5 +1,4 @@
-/* $Id: nss_cdb.c,v 1.5 2006-06-28 17:49:21 mjt Exp $
- * nss_cdb common routines.
+/* nss_cdb.c: nss_cdb common routines.
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

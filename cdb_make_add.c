@@ -1,5 +1,4 @@
-/* $Id: cdb_make_add.c,v 1.8 2006-06-28 17:49:21 mjt Exp $
- * basic cdb_make_add routine
+/* cdb_make_add.c: basic cdb_make_add routine
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

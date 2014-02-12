@@ -1,5 +1,4 @@
-/* $Id: cdb_int.h,v 1.13 2006-06-28 17:49:21 mjt Exp $
- * internal cdb library declarations
+/* cdb_int.h: internal cdb library declarations
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

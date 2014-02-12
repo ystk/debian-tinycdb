@@ -1,5 +1,4 @@
-/* $Id: cdb_make_put.c,v 1.13 2005-04-18 09:46:50 mjt Exp $
- * "advanced" cdb_make_put routine
+/* cdb_make_put.c: "advanced" cdb_make_put routine
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

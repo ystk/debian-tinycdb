@@ -1,5 +1,13 @@
-$Id: NEWS,v 1.6 2009-01-31 17:12:21 mjt Exp $
 User-visible news.  Latest at the top.
+
+tinycdb-0.78 2012-05-11
+
+ - bugfix release:
+  o fixed >2Gb file size prob on 32bit platform
+  o fixed handling of files >=4Gb
+  o fixed a few compiler warnings
+
+ - introduce $(LD) and $(LDFLAGS), and also $(CDEFS) in Makefile
 
 tinycdb-0.77
 

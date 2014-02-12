@@ -1,5 +1,4 @@
-.\" $Id: cdb.3,v 1.11 2009-01-31 17:12:22 mjt Exp $
-.\" cdb library manpage
+.\" cdb.3: cdb library manpage
 .\"
 .\" This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
 .\" Public domain.
@@ -28,7 +27,7 @@ that is, once created, file cannot be updated but recreated
 from scratch -- this is why database is called \fIconstant\fR.
 Cdb file is optimized for quick access.  Format of such file
 described in \fIcdb\fR(5) manpage.  This manual page corresponds
-to version \fB0.77\fR of \fBtinycdb\fR package.
+to version \fB0.78\fR of \fBtinycdb\fR package.
 
 Library defines two non-interlaced interfaces: for querying
 existing cdb file data (read-only mode) and for creating
@@ -525,9 +524,9 @@ Note: in all examples below, error checking is not shown for brewity.
  /* sequential database access */
  unsigned pos;
  int n;
- cdb_seqinit(&cdb, &cpos);
+ cdb_seqinit(&pos, &cdb);
  n = 0;
- while(cdb_seqnext(&cdb, &cpos) > 0) {
+ while(cdb_seqnext(&pos, &cdb) > 0) {
    keylen = cdb_keylen(&cdb);
    key = malloc(keylen + 1);
    cdb_read(&cdb, key, keylen, cdb_keypos(&cdb));

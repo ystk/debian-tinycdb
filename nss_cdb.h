@@ -1,5 +1,4 @@
-/* $Id: nss_cdb.h,v 1.2 2003-11-03 20:10:46 mjt Exp $
- * nss_cdb common include file.
+/* nss_cdb.h: nss_cdb common include file.
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

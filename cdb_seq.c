@@ -1,5 +1,4 @@
-/* $Id: cdb_seq.c,v 1.8 2003-11-03 20:10:17 mjt Exp $
- * sequential record retrieval routines
+/* cdb_seq.c: sequential record retrieval routines
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

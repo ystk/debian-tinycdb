@@ -1,5 +1,4 @@
-/* $Id: cdb_init.c,v 1.12 2008-11-06 18:07:04 mjt Exp $
- * cdb_init, cdb_free and cdb_read routines
+/* cdb_init.c: cdb_init, cdb_free and cdb_read routines
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.
@@ -33,7 +32,7 @@ cdb_init(struct cdb *cdbp, int fd)
   /* trivial sanity check: at least toc should be here */
   if (st.st_size < 2048)
     return errno = EPROTO, -1;
-  fsize = (unsigned)(st.st_size & 0xffffffffu);
+  fsize = st.st_size < 0xffffffffu ? st.st_size : 0xffffffffu;
   /* memory-map file */
 #ifdef _WIN32
   hFile = (HANDLE) _get_osfhandle(fd);

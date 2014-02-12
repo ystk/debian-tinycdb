@@ -1,5 +1,4 @@
-/* $Id: cdb_findnext.c,v 1.9 2003-11-03 16:42:41 mjt Exp $
- * sequential cdb_find routines
+/* cdb_findnext.c: sequential cdb_find routines
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

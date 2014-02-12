@@ -1,5 +1,4 @@
-/* $Id: nss_cdb-group.c,v 1.1 2003-11-03 18:23:42 mjt Exp $
- * nss_cdb group database routines.
+/* nss_cdb-group.c: nss_cdb group database routines.
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

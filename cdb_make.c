@@ -1,5 +1,4 @@
-/* $Id: cdb_make.c,v 1.13 2009-01-12 21:59:30 mjt Exp $
- * basic cdb creation routines
+/* cdb_make.c: basic cdb creation routines
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

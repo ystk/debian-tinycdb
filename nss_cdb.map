@@ -1,5 +1,4 @@
-# $Id: nss_cdb.map,v 1.1 2006-06-28 13:25:46 mjt Exp $
-# libnss_cdb symbol map file for GNU LD
+# nss_cdb.map: libnss_cdb symbol map file for GNU LD
 {
   global:
    _nss_cdb_endpwent;

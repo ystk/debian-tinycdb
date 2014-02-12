@@ -1,7 +1,6 @@
 #! /bin/sh
 
-# $Id: tests.sh,v 1.3 2003-11-03 21:08:55 mjt Exp $
-# This script will run tests for cdb.
+# tests.sh: This script will run tests for cdb.
 # Execute with ./tests.sh ./cdb
 # (first arg if present gives path to cdb tool to use, default is `cdb').
 #
@@ -106,7 +105,7 @@ echo $?
 
 echo Handling file size limits
 (
- ulimit -f 3
+ ulimit -f 4
  trap '' 25
  (
   for i in 0 1 2 3 4 5 6 7 8 9 ; do

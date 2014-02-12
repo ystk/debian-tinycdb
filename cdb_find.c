@@ -1,5 +1,4 @@
-/* $Id: cdb_find.c,v 1.8 2003-11-03 16:42:41 mjt Exp $
- * cdb_find routine
+/* cdb_find.c: cdb_find routine
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

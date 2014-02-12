@@ -1,5 +1,4 @@
-/* $Id: cdb_hash.c,v 1.5 2003-11-03 16:42:41 mjt Exp $
- * cdb hashing routine
+/* cdb_hash.c: cdb hashing routine
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

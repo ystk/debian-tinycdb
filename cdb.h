@@ -1,12 +1,11 @@
-/* $Id: cdb.h,v 1.10 2009-01-31 17:12:22 mjt Exp $
- * public cdb include file
+/* cdb.h: public cdb include file
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.
  */
 
 #ifndef TINYCDB_VERSION
-#define TINYCDB_VERSION 0.77
+#define TINYCDB_VERSION 0.78
 
 #ifdef __cplusplus
 extern "C" {

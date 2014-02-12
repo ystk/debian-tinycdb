@@ -1,5 +1,4 @@
-/* $Id: nss_cdb-spwd.c,v 1.1 2003-11-03 18:23:42 mjt Exp $
- * nss_cdb shadow passwd database routines.
+/* nss_cdb-spwd.c: nss_cdb shadow passwd database routines.
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.

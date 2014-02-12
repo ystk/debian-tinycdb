@@ -1,12 +1,11 @@
-# $Id: tinycdb.spec,v 1.6 2009-01-31 17:12:22 mjt Exp $
-# tinycdb RPM spec file.
+# tinycdb.spec: tinycdb RPM spec file.
 #
 # This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
 # Public domain.
 
 Summary: A package for maintenance of constant databases
 Name: tinycdb
-Version: 0.77
+Version: 0.78
 Release: 1
 Source: ftp://ftp.corpit.ru/pub/tinycdb/tinycdb_%version.tar.gz
 License: Public Domain

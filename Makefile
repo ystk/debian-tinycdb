@@ -1,11 +1,10 @@
 #! /usr/bin/make -rf
-# $Id: Makefile,v 1.28 2009-01-31 17:12:21 mjt Exp $
-# make file for tinycdb package
+# Makefile: make file for tinycdb package
 #
 # This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
 # Public domain.
 
-VERSION = 0.77
+VERSION = 0.78
 
 prefix=/usr/local
 exec_prefix=$(prefix)
@@ -20,6 +19,9 @@ DESTDIR=
 
 CC = cc
 CFLAGS = -O
+CDEFS = -D_FILE_OFFSET_BITS=64
+LD = $(CC)
+LDFLAGS =
 
 AR = ar
 ARFLAGS = rv
@@ -39,9 +41,9 @@ INSTALLPROG = cdb
 # The following assumes GNU CC/LD -
 # used for building shared libraries only
 CFLAGS_PIC = -fPIC
-CFLAGS_SHARED = -shared
-CFLAGS_SONAME = -Wl,--soname=
-CFLAGS_VSCRIPT = -Wl,--version-script=
+LDFLAGS_SHARED = -shared
+LDFLAGS_SONAME = -Wl,--soname=
+LDFLAGS_VSCRIPT = -Wl,--version-script=
 
 CP = cp
 
@@ -57,7 +59,8 @@ DISTFILES = Makefile cdb.h cdb_int.h $(LIB_SRCS) cdb.c \
  tinycdb.spec tests.sh tests.ok \
  $(LIBMAP) $(NSSMAP) \
  ChangeLog NEWS
-DEBIANFILES = debian/control debian/rules debian/copyright debian/changelog
+DEBIANLIST = changelog compat control control.nss copyright libcdb.pc rules
+DEBIANFILES = $(addprefix debian/, $(DEBIANLIST))
 
 all: static
 static: staticlib cdb
@@ -84,27 +87,27 @@ $(PICLIB): $(LIB_OBJS_PIC)
 $(SHAREDLIB): $(LIB_OBJS_PIC) $(LIBMAP)
 	-rm -f $(SOLIB)
 	ln -s $@ $(SOLIB)
-	$(CC) $(CFLAGS) $(CFLAGS_SHARED) -o $@ \
-	 $(CFLAGS_SONAME)$(SHAREDLIB) $(CFLAGS_VSCRIPT)$(LIBMAP) \
+	$(LD) $(LDFLAGS) $(LDFLAGS_SHARED) -o $@ \
+	 $(LDFLAGS_SONAME)$(SHAREDLIB) $(LDFLAGS_VSCRIPT)$(LIBMAP) \
 	 $(LIB_OBJS_PIC)
 
 cdb: cdb.o $(CDB_USELIB)
-	$(CC) $(CFLAGS) -o $@ cdb.o $(CDB_USELIB)
+	$(LD) $(LDFLAGS) -o $@ cdb.o $(CDB_USELIB)
 cdb-shared: cdb.o $(SHAREDLIB)
-	$(CC) $(CFLAGS) -o $@ cdb.o $(SHAREDLIB)
+	$(LD) $(LDFLAGS) -o $@ cdb.o $(SHAREDLIB)
 
 $(NSS_CDB): $(NSS_OBJS) $(NSS_USELIB) $(NSSMAP)
-	$(CC) $(CFLAGS) $(CFLAGS_SHARED) -o $@ \
-	 $(CFLAGS_SONAME)$@ $(CFLAGS_VSCRIPT)$(NSSMAP) \
+	$(LD) $(LDFLAGS) $(LDFLAGS_SHARED) -o $@ \
+	 $(LDFLAGS_SONAME)$@ $(LDFLAGS_VSCRIPT)$(NSSMAP) \
 	 $(NSS_OBJS) $(NSS_USELIB)
 
 .SUFFIXES:
 .SUFFIXES: .c .o .lo
 
 .c.o:
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) $(CDEFS) -c $<
 .c.lo:
-	$(CC) $(CFLAGS) $(CFLAGS_PIC) -c -o $@ -DNSSCDB_DIR=\"$(NSSCDB_DIR)\" $<
+	$(CC) $(CFLAGS) $(CDEFS) $(CFLAGS_PIC) -c -o $@ -DNSSCDB_DIR=\"$(NSSCDB_DIR)\" $<
 
 cdb.o: cdb.h
 $(LIB_OBJS) $(LIB_OBJS_PIC): cdb_int.h cdb.h

@@ -1,5 +1,4 @@
-# $Id: libcdb.map,v 1.1 2006-06-28 13:25:46 mjt Exp $
-# libcdb symbol map file for GNU LD
+# libcdb.map: libcdb symbol map file for GNU LD
 {
   global:
     cdb_hash;

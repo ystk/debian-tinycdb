@@ -1,13 +1,13 @@
 Source: tinycdb
 Section: utils
 Priority: optional
-Maintainer: Michael Tokarev <mjt@corpit.ru>
-Build-Depends: debhelper (>= 4)
-Standards-Version: 3.8.0
+Maintainer: Michael Tokarev <mjt@tls.msk.ru>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.9.3
 
 Package: tinycdb
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: an utility to manipulate constant databases (cdb)
  tinycdb is a small, fast and reliable utility and subroutine
  library for creating and reading constant databases. The database
@@ -19,7 +19,9 @@ Description: an utility to manipulate constant databases (cdb)
 Package: libcdb1
 Architecture: any
 Section: libs
-Depends: ${shlibs:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
 Description: shared library for constant databases (cdb)
  tinycdb is a small, fast and reliable utility and subroutine
  library for creating and reading constant databases. The database
@@ -31,7 +33,7 @@ Description: shared library for constant databases (cdb)
 Package: libcdb-dev
 Architecture: any
 Section: libdevel
-Depends: libcdb1 (= ${binary:Version})
+Depends: libcdb1 (= ${binary:Version}), ${misc:Depends}
 Recommends: tinycdb
 Replaces: tinycdb (<< 0.75)
 Description: development files for constant databases (cdb)

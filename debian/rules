@@ -1,59 +1,49 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
-CFLAGS = -Wall -W -g
-# can't use -Wmissing-prototypes due to nss routines
+LIBDIR = /usr/lib/$(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 
-INSTALL = install
-INSTALL_PROGRAM = $(INSTALL) -p
-INSTALL_DATA = $(INSTALL) -p -m0644
-
-ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	CFLAGS += -O0
-else
-	CFLAGS += -O2
-endif
-ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
-	INSTALL_PROGRAM += -s
-endif
-ifeq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
-	CDEFS += -DNDEBUG
-endif
+CFLAGS = $(shell dpkg-buildflags --get CFLAGS) \
+ $(shell dpkg-buildflags --get CPPFLAGS) \
+ -Wall -W
+LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS)
 
 SOVER = 1
 
 configure:	# nothing
 	dh_testdir
 
-build:	build-stamp
-build-stamp:
+build-arch: libcdb.pc
+libcdb.pc:
 	dh_testdir
-	$(MAKE) CFLAGS="$(CFLAGS)" \
+	$(MAKE) CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" \
 		staticlib sharedlib cdb-shared nss
-	cp -pf cdb-shared cdb
 	cp -pf nss_cdb-Makefile cdb-Makefile
-	touch $@
+	cp -pf cdb-shared cdb
+	sed 's/@VERSION@/$(shell sed -n 's/^VERSION *= *//p' Makefile)/' debian/libcdb.pc > $@
 
 clean:
 	dh_testdir
-	rm -f build-stamp cdb-Makefile
+	rm -f cdb-Makefile libcdb.pc
 	$(MAKE) distclean
 	dh_clean
+
+build-indep:
+build: build-arch
 
 install: build
 	dh_testdir
 	dh_testroot
 	dh_clean
-	dh_installdirs
 	dh_installdocs -A NEWS
 
 # libcdb$(SOVER)
-	dh_install -plibcdb$(SOVER) libcdb.so.$(SOVER) usr/lib
+	dh_install -plibcdb$(SOVER) libcdb.so.$(SOVER) $(LIBDIR)
 
 # libcdb-dev
-	dh_install -plibcdb-dev libcdb.a libcdb_pic.a libcdb.so usr/lib
+	dh_install -plibcdb-dev libcdb.a libcdb_pic.a libcdb.so $(LIBDIR)
 	dh_install -plibcdb-dev cdb.h usr/include
-	dh_install -plibcdb-dev debian/libcdb.pc usr/lib/pkgconfig
+	dh_install -plibcdb-dev libcdb.pc $(LIBDIR)/pkgconfig
 	dh_installman -plibcdb-dev cdb.3
 #	dh_installdocs -plibcdb-dev TODO
 
@@ -65,9 +55,9 @@ install: build
 #	dh_install -plibnss-cdb cdb-Makefile etc
 #	dh_install -plibnss-cdb libnss_cdb.so.2 lib
 
-binary-indep: build install
+binary-indep:
 
-binary-arch: build install
+binary-arch: build-arch install
 	dh_testdir
 	dh_testroot
 	dh_installchangelogs
@@ -77,10 +67,12 @@ binary-arch: build install
 	dh_fixperms
 	dh_makeshlibs
 	dh_installdeb
-	dh_shlibdeps -L libcdb$(SOVER) -l debian/libcdb$(SOVER)/usr/lib
+	dh_shlibdeps -L libcdb$(SOVER) -l debian/libcdb$(SOVER)$(LIBDIR)
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
 
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install configure
+binary: binary-arch
+
+.PHONY: clean configure install
+.PHONY: build build-indep build-arch binary binary-indep binary-arch

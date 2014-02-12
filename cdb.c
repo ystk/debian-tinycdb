@@ -1,5 +1,4 @@
-/* $Id: cdb.c,v 1.18 2008-11-06 22:37:33 mjt Exp $
- * cdb command line tool
+/* cdb.c: cdb command line tool
  *
  * This file is a part of tinycdb package by Michael Tokarev, mjt@corpit.ru.
  * Public domain.
@@ -10,17 +9,20 @@
 #ifdef _WIN32		/* by the way, how about win64? */
 # include <io.h>
 # include <malloc.h>
+/* This pragma suppresses snippy VC warnings for POSIX functions like read() */
 # pragma warning(disable: 4996)
 #else
 # include <unistd.h>
 #endif
 
+#include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <sys/stat.h>
 #include "cdb.h"
 
 #ifndef EPROTO
